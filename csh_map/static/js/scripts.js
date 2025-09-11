@@ -1,8 +1,8 @@
 /* regexBldg gets building name from ID
-           Ex:  nrh-3-3071  => nrh
+           Ex:  dsp-3-3071  => dsp
                 fish-3-3050 => fish
    regexNum gets room # from ID
-           Ex:  nrh-3-3071  => 3071
+           Ex:  dsp-3-3071  => 3071
            fish-3-3050 => 3050
 */
 
@@ -162,16 +162,16 @@ function updateResidents(roomNum) {
     }
 }
 
-function nrhOrFish(id) {
+function dspOrFish(id) {
     /*
-    Uses regex, checks if id starts with nrh or fish, or something else
-    Example IDs:  nrh-3-3071  => isNrh
+    Uses regex, checks if id starts with dsp or fish, or something else
+    Example IDs:  dsp-3-3071  => isDsp
                   fish-3-3050 => isFish
                   sol-3-3011  => Neither
     */
     var bldg = id.match(regexBldg).toString(),
         num = id.match(regexNum).toString();
-    if (bldg === "nrh") {
+    if (bldg === "dsp") {
         $modalTitle.css('textTransform', 'uppercase');
         updateModalBody("Loading...");
         updateModalTitle(bldg + " " + num);
@@ -182,7 +182,7 @@ function nrhOrFish(id) {
         updateModalTitle(bldg + " " + num);
         updateResidents('F ' + num);
     } else {
-        console.log("ERROR: Room of id " + id + " is neither in NRH nor Fish");
+        console.log("ERROR: Room of id " + id + " is neither in DSP nor Fish");
     }
 }
 
@@ -190,9 +190,9 @@ $('.room').click(function() {
     /*
     Uses jQuery click function,
     gets ID of clicked element
-    and calls nrhOrFish w/ ID.
+    and calls dspOrFish w/ ID.
     */
-    nrhOrFish(this.id);
+    dspOrFish(this.id);
 });
 
 
@@ -202,11 +202,11 @@ $('#search-button').click(function(e) {
     var bldg = query.match(regexBldg),
         num = query.match(regexNum);
         id = ('#' + bldg + "-3-" + num).toString();  // Concatenates the bldg name and room num to a searcheable ID
-    if ((bldg == "nrh" || bldg == "fish") && ($(id).length)) {  // Checks if the building is NRH/Fish, and if the room exists on the map
-        nrhOrFish(query);
+    if ((bldg == "dsp" || bldg == "fish") && ($(id).length)) {  // Checks if the building is DSP/Fish, and if the room exists on the map
+        dspOrFish(query);
         $('#map-modal').modal('show');
     }
     else {
-        $('#search').attr('data-content', 'Room not found.\nExample searches: NRH 3071, Fish 3049').popover('show').popover('disable');
+        $('#search').attr('data-content', 'Room not found.\nExample searches: DSP 3071, Fish 3049').popover('show').popover('disable');
     }
 });
