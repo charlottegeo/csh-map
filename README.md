@@ -1,7 +1,7 @@
 # CSH Map
 
 ## Overview
-An internal site of RIT's [Computer Science House](https://csh.rit.edu) that shows the occupants of each room in CSH, both Nathaniel Rochester Hall and Helen Fish Hall. It's hosted on our internal [OpenShift](https://www.openshift.com/), built using [Flask](flask.pocoo.org), and pulls directly from CSH's LDAP server, so it'll show future occupants of rooms automatically, with no hard-coding necessary.
+An internal site of RIT's [Computer Science House](https://csh.rit.edu) that shows the occupants of each room in CSH, both Fredericka Douglass Sprague Perry Hall and Helen Fish Hall. It's hosted on our internal [OpenShift](https://www.openshift.com/), built using [Flask](flask.pocoo.org), and pulls directly from CSH's LDAP server, so it'll show future occupants of rooms automatically, with no hard-coding necessary.
 
 ## Screenshots
 CSH Map is an internal site, and thus not public-facing, however below are some screenshots showing how the site looks and works.
