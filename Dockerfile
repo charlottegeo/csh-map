@@ -1,20 +1,24 @@
-FROM docker.io/python:3.7.0-alpine3.8
+FROM docker.io/python:3.13-slim-trixie
 MAINTAINER Ram Zallan (ram@csh.rit.edu)
 
-# Install additional system packages required for certain python dependencies
-RUN apk add --no-cache postgresql-dev libffi-dev python-dev gcc musl-dev libressl-dev openldap-dev ca-certificates && \
-update-ca-certificates
+# Install Debian packages required for dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    libffi-dev \
+    libldap2-dev \
+    libsasl2-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Configure OpenLDAP to use the system trusted CA Store
-RUN echo "tls_cacertdir /etc/ssl/certs" >> /etc/openldap/ldap.conf
+RUN mkdir -p /etc/ldap && echo "TLS_CACERT /etc/ssl/certs/ca-certificates.crt" >> /etc/ldap/ldap.conf
 
 # Add application user
-RUN adduser -S map && \
-mkdir -p /opt/map
+RUN groupadd -r map && useradd --no-log-init -r -g map map
 
 # Add files and set permissions
 ADD . /opt/map
-RUN chown -R map /opt/map
+RUN chown -R map:map /opt/map
 WORKDIR /opt/map
 
 # Install python dependencies
