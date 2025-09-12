@@ -36,7 +36,15 @@ function updateResidents(roomNum) {
         case "3058":
             $modalTitle.css('textTransform', 'capitalize');
             updateModalTitle("Lounge");
-            updateModalBody("No residents.");
+            var mpas = groups['mpa'];
+            var mpaHTML = "";
+            for (var i = 0; i < mpas.length; i++) {
+                mpaHTML += mpas[i];
+              if (i < mpas.length - 1) {
+                mpaHTML += "<br>"
+              }
+            }
+            updateModalBody(mpaHTML);
             break;
         case "3098":
             $modalTitle.css('textTransform', 'capitalize');
@@ -119,7 +127,7 @@ function updateResidents(roomNum) {
         case "3080":
             $modalTitle.css('textTransform', 'capitalize');
             updateModalTitle("Trash Room");
-            updateModalBody("Ram Zallan");
+            updateModalBody("No residents.");
             break;
         case "3078":
             $modalTitle.css('textTransform', 'capitalize');
@@ -129,7 +137,7 @@ function updateResidents(roomNum) {
         case "3082":
             $modalTitle.css('textTransform', 'capitalize');
             updateModalTitle("Kitchen");
-            updateModalBody("Dyllon Chowdhury");
+            updateModalBody(groups['eboard']['Improvements']);
             break;
         case "F%203961":
         case "3961":
