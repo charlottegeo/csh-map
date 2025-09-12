@@ -54,6 +54,7 @@ def _ldap_construct_eboard_dictionary(app):
         "History": _ldap_get_group_members(app, "eboard-history"),
         "Improvements": _ldap_get_group_members(app, "eboard-imps"),
         "Opcomm": _ldap_get_group_members(app, "eboard-opcomm"),
+        "PR": _ldap_get_group_members(app, "eboard-pr"),
         "R&D": _ldap_get_group_members(app, "eboard-research"),
         "Social": _ldap_get_group_members(app, "eboard-social"),
         "Secretary": _ldap_get_group_members(app, "eboard-secretary")
@@ -74,9 +75,7 @@ def get_groups(app):
     groups = {}
 
     groups['rtp'] = _ldap_get_group_members(app, "active_rtp")
-
     groups['3da'] = _ldap_get_group_members(app, "3da")
-
     groups['eboard'] = _ldap_construct_eboard_dictionary(app)
-
+    groups['mpa'] = _ldap_get_group_members(app, "mediapcadmin")
     return groups
