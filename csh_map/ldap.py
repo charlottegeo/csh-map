@@ -7,7 +7,20 @@ Returns a list of Common Names (i.e. "Ram Zallan") of members in a given group
 def _ldap_get_group_members(app, group):
     return [member.cn for member in app.config['LDAP_CONN'].get_group(group).get_members()]
 
+"""
+Gets active members in a specific group (for groups that don't have a separate "active" LDAP role)
+"""
+def get_active_group_members(app, group):
+    target_group = app.config['LDAP_CONN'].get_group(group)
+    active_group = app.config['LDAP_CONN'].get_group("active")
 
+    active_members = []
+    for member in target_group.get_members():
+        if member.in_group(active_group):
+            active_members.append(member.cn)
+
+    return active_members
+    
 """
 Inititalizes a connection to the LDAP server using csh_ldap
 """
@@ -75,7 +88,7 @@ def get_groups(app):
     groups = {}
 
     groups['rtp'] = _ldap_get_group_members(app, "active_rtp")
-    groups['3da'] = _ldap_get_group_members(app, "3da")
+    groups['3da'] = _ldap_get_group_members(app, "active_3da")
     groups['eboard'] = _ldap_construct_eboard_dictionary(app)
-    groups['mpa'] = _ldap_get_group_members(app, "mediapcadmin")
+    groups['mpa'] = get_active_group_members(app, "mediapcadmin")
     return groups
