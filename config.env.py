@@ -13,11 +13,11 @@ LDAP_BIND_DN=os.environ.get('MAP_LDAP_BIND_DN', 'krbprincipalname=map/os-router-
 LDAP_BIND_PW=os.environ.get('MAP_LDAP_BIND_PW', '')
 
 # OpenID Connect SSO config
-OIDC_ISSUER = os.environ.get('MAP_OIDC_ISSUER', 'https://sso.csh.rit.edu/realms/csh')
-OIDC_CLIENT_CONFIG = {
-    'client_id': os.environ.get('MAP_OIDC_CLIENT_ID', 'map'),
-    'client_secret': os.environ.get('MAP_OIDC_CLIENT_SECRET', ''),
-    'post_logout_redirect_uris': [os.environ.get('MAP_OIDC_LOGOUT_REDIRECT_URI', 'https://map.csh.rit.edu/logout')]
+OIDC_PROVIDER_METADATA = {
+    "issuer": os.environ.get('MAP_OIDC_ISSUER', 'https://sso.csh.rit.edu/realms/csh'),
+    "client_id": os.environ.get('MAP_OIDC_CLIENT_ID', 'map'),
+    "client_secret": os.environ.get('MAP_OIDC_CLIENT_SECRET', ''),
+    "post_logout_redirect_uris": [os.environ.get('MAP_OIDC_LOGOUT_REDIRECT_URI', 'https://map.csh.rit.edu/logout')]
 }
 
 PLUG_SUPPORT = os.environ.get('PLUG_ENABLED', 'False') == 'True'
