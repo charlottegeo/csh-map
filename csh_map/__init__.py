@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask, jsonify, render_template, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, session
 from csh_map.ldap import ldap_init, get_onfloors, get_groups
 from flask_pyoidc.flask_pyoidc import OIDCAuthentication
 
@@ -15,9 +15,7 @@ else:
 requests.packages.urllib3.disable_warnings()
 
 ldap_init(app)
-auth = OIDCAuthentication(app,
-                          issuer=app.config['OIDC_ISSUER'],
-                          client_registration_info=app.config['OIDC_CLIENT_CONFIG'])
+auth = OIDCAuthentication(app)
 
 
 @app.route("/")
