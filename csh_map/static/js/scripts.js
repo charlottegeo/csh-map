@@ -68,20 +68,27 @@ function updateResidents(roomNum) {
         case "3021":
             $modalTitle.css('textTransform', 'capitalize');
             updateModalTitle("Project Room");
-            updateModalBody(groups['eboard']['Improvements']);
+            var threedeeayys = groups['3da'];
+            var projectHTML = "";
+            projectHTML += groups['eboard']['Improvements'] += "<br>";
+            for (var i = 0; i < threedeeayys.length; i++) {
+              projectHTML += threedeeayys[i];
+              if (i < threedeeayys.length - 1) {
+                projectHTML += "<br>"
+              }
+            }
+            updateModalBody(projectHTML);
             break;
         case "3017":
             $modalTitle.css('textTransform', 'capitalize');
             updateModalTitle("Research Room");
-            var threedeeayys = groups['3da'];
-            var threedeeayyHTML = "";
-            for (var i = 0; i < threedeeayys.length; i++) {
-              threedeeayyHTML += threedeeayys[i];
-              if (i < threedeeayys.length - 1) {
-                threedeeayyHTML += "<br>"
-              }
+            let rnd = groups['eboard']['R&D'];
+            if (rnd[1]) {
+                // dual directorship
+                updateModalBody(rnd[0] + '<br>' + rnd[1]);
+            } else {
+                updateModalBody(rnd[0]);
             }
-            updateModalBody(threedeeayyHTML);
             break;
         case "3012":
             $modalTitle.css('textTransform', 'capitalize');
